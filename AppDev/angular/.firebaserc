@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "bbsm-angular-app-8329a": {
+      "hosting": {
+        "angular": [
+          "bbsm-angular-app-8329a"
+        ]
+      }
+    }
+  }
+}

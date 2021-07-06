@@ -1,0 +1,25 @@
+<div class="container mt-5">
+    <div class="row">
+            <h3>Welcome, {{ userName }}</h3>
+    </div>
+    <div class="row justify-content-end">
+        <div class="col col-md-4">
+            <button type="button" class="btn btn-primary" (click)="onUploadJSONClicked()">Upload JSON</button>&nbsp;
+            <button type="button" class="btn btn-primary" (click)="onShowFileListClicked()">Show All Files</button>
+        </div>
+    </div>
+    <div class="row mt-5 justify-content-center" id="uploadJSON" *ngIf="!showFileList">
+        <div class="col col-md-4">
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" id="inputGroupFile02" (change)="onChange($event)">
+                <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
+                <button (click)="onUpload()" class="btn btn-primary">Upload</button>
+              </div>
+        </div>
+    </div>
+    <div class="row mt-5" id="fileList" *ngIf="showFileList">
+        <app-file-list></app-file-list>
+    </div>
+
+
+</div>

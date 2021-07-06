@@ -1,0 +1,72 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col col-md-6">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="actionFailed">
+                {{ actionMessage }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="actionSuccess">
+                {{ actionMessage }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">Login</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab">Sign Up</button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col col-md-8">
+                                <form class="form-group" [formGroup]="loginFormGroup" (ngSubmit)="onLoginClicked()">
+                                    <label class="col-form-label" for="email1">Email:</label><br />
+                                    <input class="form-control" type="email" id="email1" formControlName="email">
+                                    <small *ngIf="loginFormGroup.get('email')?.touched && loginFormGroup.get('email')?.invalid" class="form-text text-danger">
+                                        This field is required
+                                    </small><br />
+                                    <label class="col-form-label" for="password1">Password:</label><br />
+                                    <input class="form-control" type="password" id="password1" formControlName="password">
+                                    <small *ngIf="loginFormGroup.get('password')?.touched && loginFormGroup.get('password')?.invalid" class="form-text text-danger">
+                                        This field is required
+                                    </small><br />
+                                    <div style="text-align: center">
+                                        <!-- <input type="submit" class="btn btn-primary" value="Login"> -->
+                                        <button type="submit" class="btn btn-primary" [disabled]="!loginFormGroup.valid">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col col-md-8">
+                                <form class="form-group" [formGroup]="signupFormGroup" (ngSubmit)="onSignupClicked()">
+                                    <label class="col-form-label" for="email2">Email:</label><br />
+                                    <input class="form-control" type="email" id="email2" formControlName="email">
+                                    <small *ngIf="signupFormGroup.get('email')?.touched && signupFormGroup.get('email')?.invalid" class="form-text text-danger">
+                                        This field is required
+                                    </small><br />
+                                    <label class="col-form-label" for="password2">Password:</label><br />
+                                    <input class="form-control" type="password" id="password2" formControlName="password"><br />
+                                    <small *ngIf="signupFormGroup.get('password')?.touched && signupFormGroup.get('password')?.invalid" class="form-text text-danger">
+                                        This field is required
+                                    </small>
+                                    <div style="text-align: center">
+                                        <!-- <input type="submit" class="btn btn-primary" value="Sign Up"> -->
+                                        <button type="submit" class="btn btn-primary" [disabled]="!signupFormGroup.valid">Sign Up</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
