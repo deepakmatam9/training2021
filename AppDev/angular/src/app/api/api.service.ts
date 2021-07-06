@@ -5,7 +5,8 @@ import { Injectable } from "@angular/core";
     providedIn:'root'
 })
 export class APIService {
-    BASE_URL = 'http://127.0.0.1:5075';
+    //BASE_URL = 'http://127.0.0.1:8080';
+    BASE_URL = '';
     API_URL = `${this.BASE_URL}/api`;
     FILE_UPLOAD_URL = `${this.API_URL}/upload-file`;
     GET_ALL_FILES_LIST = `${this.API_URL}/list-all-files`;

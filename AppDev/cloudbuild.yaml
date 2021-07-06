@@ -1,0 +1,20 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['source','repos', 'clone', 'github_bhargavasatyamani_training2021', '--project=bbsm-dev']
+
+- name: 'gcr.io/cloud-builders/git'
+  args: ['fetch' ,'--all']
+  dir: 'github_bhargavasatyamani_training2021'
+
+- name: 'gcr.io/cloud-builders/git'
+  args: ['checkout','main']
+  dir: 'github_bhargavasatyamani_training2021'
+
+- name: 'gcr.io/cloud-builders/npm:node-14.10.0'
+  args: ['run-script','deploy']
+  dir: 'github_bhargavasatyamani_training2021/AppDev/angular'
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['-q','app','deploy','app.yaml']
+
+timeout: "3000s"
