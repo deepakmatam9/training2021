@@ -16,5 +16,6 @@ steps:
 
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['-q','app','deploy','app.yaml']
+  dir: 'github_bhargavasatyamani_training2021/AppDev'
 
 timeout: "3000s"
