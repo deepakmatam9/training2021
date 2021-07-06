@@ -10,7 +10,7 @@ steps:
   args: ['checkout','main']
   dir: 'github_bhargavasatyamani_training2021'
 
-- name: 'gcr.io/cloud-builders/npm:node-14.15.0'
+- name: 'gcr.io/cloud-builders/npm:node-10.10.0'
   args: ['run-script','deploy']
   dir: 'github_bhargavasatyamani_training2021/AppDev/angular'
 
