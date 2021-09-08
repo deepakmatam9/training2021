@@ -8,6 +8,7 @@ python dataflow_gcs_to_bq.py --input_file gs://bbsm-dev-bucket/dataflow/input_di
 --staging_location gs://dataflow-staging-us-central1-995870156386/ --setup_file ./setup.py
 
 """
+#changes
 import argparse
 import csv
 import json
