@@ -18,6 +18,7 @@ from apache_beam.options.pipeline_options import PipelineOptions, GoogleCloudOpt
 from apache_beam.io.gcp.bigquery import BigQueryDisposition
 
 from google.cloud import bigquery
+from google.cloud.bigquery import table
 from beamutils.BQDataTypes import BQDataTypes
 
 
@@ -67,22 +68,24 @@ class StringToRowDict(beam.DoFn):
 
 #save_main_session is to avoid NameErrors (https://cloud.google.com/dataflow/docs/resources/faq#how_do_i_handle_nameerrors)
 def run(argv=None, save_main_session=True):
-    pipeline_options = GCSToBQOptions()
-    project_id = pipeline_options.view_as(GoogleCloudOptions).project
-    pipeline_options.view_as(SetupOptions).save_main_session = save_main_session
+    # pipeline_options = GCSToBQOptions()
+    # project_id = pipeline_options.view_as(GoogleCloudOptions).project
+    project_id = 'clever-form-311403'
+    # pipeline_options.view_as(SetupOptions).save_main_session = save_main_session
 
-    dataset_id, table_id = pipeline_options.target_bq_table.split('.')
+    # dataset_id, table_id = pipeline_options.target_bq_table.split('.')
+    dataset_id , table_id = 'sample', 'sample_table1'
     full_table_id = dataset_id + '.' + table_id
     schema = get_schema_as_list(project_id=project_id, dataset_id=dataset_id, table_id=table_id)
     schema_str = ",".join([f"{field['name']}:{field['field_type']}" for field in schema['fields']])
     print(schema_str)
     #p = beam.Pipeline(options=pipeline_options)
+    filename = 'https://storage.cloud.google.com/gcs-to-big-query-1/sample.csv'
 
-
-    with beam.Pipeline(options=pipeline_options) as p:
+    with beam.Pipeline(options='') as p:
         (
             p
-            | 'ReadFromInputFile' >> beam.io.ReadFromText(file_pattern=pipeline_options.input_file,
+            | 'ReadFromInputFile' >> beam.io.ReadFromText(file_pattern='sample.csv',
                                                           skip_header_lines=1)
             | 'ConvertStringToRowDict' >> beam.ParDo(StringToRowDict(), schema)
             | 'WriteToBigQuery' >> beam.io.WriteToBigQuery(table=full_table_id,
